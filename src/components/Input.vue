@@ -162,8 +162,10 @@ export default {
         .filter(line => (/\S/).test(line))
     },
     fullPath() {
-      return this.path.replace(/\/+$/, '') +
+      return encodeURIComponent(
+        this.path.replace(/\/+$/, '') +
         '/' + this.directory + '/'
+      )
     },
     requiredFieldsFilled() {
       return (
@@ -176,6 +178,8 @@ export default {
       )
     },
     podcast() {
+      // This object gets emitted back to parent
+      // when data in the form changes.
       return {
         author: this.author,
         category: this.category,
