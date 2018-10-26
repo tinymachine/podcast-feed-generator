@@ -94,7 +94,7 @@ export default {
     `<itunes:category text="${this.escapeAmpersands(this.podcast.category)}">
       <itunes:category text="${this.escapeAmpersands(this.podcast.subcategory)}"/>
     </itunes:category>`
-        : `<itunes:category text="${this.podcast.category}"/>`
+        : `<itunes:category text="${this.escapeAmpersands(this.podcast.category)}"/>`
     },
     imageMarkup() {
       return this.podcast.image
