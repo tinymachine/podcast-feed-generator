@@ -28,11 +28,11 @@
 
       <section v-if="podcast.requiredFieldsFilled">
         <label>
-          Podcast Feed (RSS 2.0):
+          Feed (RSS 2.0):
 
           <p class="note">
             Copy the markup below into a file named
-            <code>{{ podcast.rssFilename }}</code>
+            <code><strong>{{ podcast.rssFilename }}</strong></code>
             and upload it to the following path: 
             <code>{{ podcast.fullPath }}</code>
           </p>

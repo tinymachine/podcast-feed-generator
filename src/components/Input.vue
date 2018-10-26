@@ -162,10 +162,8 @@ export default {
         .filter(line => (/\S/).test(line))
     },
     fullPath() {
-      return encodeURIComponent(
-        this.path.replace(/\/+$/, '') +
-        '/' + this.directory + '/'
-      )
+      return encodeURI(this.path.replace(/\/+$/, '')) + '/' +
+        encodeURIComponent(this.directory) + '/'
     },
     requiredFieldsFilled() {
       return (
@@ -174,7 +172,7 @@ export default {
         this.title &&
         this.author &&
         this.enclosureType &&
-        this.episodes.length > 0
+        this.episodes.length
       )
     },
     podcast() {
