@@ -82,8 +82,9 @@
           <p class="note">
             List files in listening order.
             Most podcast apps play newest episodes first,
-            so episode dates will be added in reverse
-            chronological order.
+            so episode dates will be applied with the first 
+            listed episode marked as published today, the 
+            second yesterday, etc.
           </p>
         </template>
       </InputText>
