@@ -1,0 +1,123 @@
+[
+  {
+    "name": "Arts",
+    "subcategories": [
+      "Design",
+      "Fashion & Beauty",
+      "Food",
+      "Literature",
+      "Performing Arts",
+      "Visual Arts"
+    ]
+  },
+  {
+    "name": "Business",
+    "subcategories": [
+      "Business News",
+      "Careers",
+      "Investing",
+      "Management & Marketing",
+      "Shopping"
+    ]
+  },
+  {
+    "name": "Comedy"
+  },
+  {
+    "name": "Education",
+    "subcategories": [
+      "Educational Technology",
+      "Higher Education",
+      "K-12",
+      "Language Courses",
+      "Training"
+    ]
+  },
+  {
+    "name": "Games & Hobbies",
+    "subcategories": [
+      "Automotive",
+      "Aviation",
+      "Hobbies",
+      "Other Games",
+      "Video Games"
+    ]
+  },
+  {
+    "name": "Government & Organizations",
+    "subcategories": [
+      "Local",
+      "National",
+      "Non-Profit",
+      "Regional"
+    ]
+  },
+  {
+    "name": "Health",
+    "subcategories": [
+      "Alternative Health",
+      "Fitness & Nutrition",
+      "Self-Help",
+      "Sexuality"
+    ]
+  },
+  {
+    "name": "Kids & Family"
+  },
+  {
+    "name": "Music"
+  },
+  {
+    "name": "News & Politics"
+  },
+  {
+    "name": "Religion & Spirituality",
+    "subcategories": [
+      "Buddhism",
+      "Christianity",
+      "Hinduism",
+      "Islam",
+      "Judaism",
+      "Other",
+      "Spirituality"
+    ]
+  },
+  {
+    "name": "Science & Medicine",
+    "subcategories": [
+      "Medicine",
+      "Natural Sciences",
+      "Social Sciences"
+    ]
+  },
+  {
+    "name": "Society & Culture",
+    "subcategories": [
+      "History",
+      "Personal Journals",
+      "Philosophy",
+      "Places & Travel"
+    ]
+  },
+  {
+    "name": "Sports & Recreation",
+    "subcategories": [
+      "Amateur",
+      "College & High School",
+      "Outdoor",
+      "Professional"
+    ]
+  },
+  {
+    "name": "Technology",
+    "subcategories": [
+      "Gadgets",
+      "Tech News",
+      "Podcasting",
+      "Software How-To"
+    ]
+  },
+  {
+    "name": "TV & Film"
+  }
+]
