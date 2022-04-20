@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="container"
-    style="background-color: rgb(238, 235, 235);"
-  >
+  <div class="container" style="background-color: rgb(238, 235, 235)">
     <header>
       <h2>
         <strong class="numeral">2</strong>
@@ -11,19 +8,17 @@
     </header>
 
     <main>
-      <section style="margin-bottom: 1rem;">
+      <section style="margin-bottom: 1rem">
         <img
           v-if="podcast.image"
           :src="podcast.fullPath + podcast.image"
           class="cover-art"
           alt=""
-        >
-        <div v-else class="tc">
-          [No image]
-        </div>
+        />
+        <div v-else class="tc">[No image]</div>
 
-        <h3>{{ podcast.title || '[Missing Title]' }}</h3>
-        <h4>{{ podcast.author || '[Missing Author]' }}</h4>
+        <h3>{{ podcast.title || "[Missing Title]" }}</h3>
+        <h4>{{ podcast.author || "[Missing Author]" }}</h4>
       </section>
 
       <section v-if="podcast.requiredFieldsFilled">
@@ -32,8 +27,10 @@
 
           <p class="note">
             Copy the markup below into a file named
-            <code><strong>{{ podcast.rssFilename }}</strong></code>
-            and upload it to the following path: 
+            <code
+              ><strong>{{ podcast.rssFilename }}</strong></code
+            >
+            and upload it to the following path:
             <code>{{ podcast.fullPath }}</code>
           </p>
 
@@ -46,7 +43,8 @@
               word-wrap: normal;
             "
             @click="copyToClipboard($event)"
-          >{{ xmlMarkup }}</textarea>
+            >{{ xmlMarkup }}</textarea
+          >
         </label>
 
         <label>
@@ -54,17 +52,16 @@
           <textarea
             readonly
             rows="1"
-            style="white-space: nowrap;"
+            style="white-space: nowrap"
             @click="copyToClipboard($event)"
             v-html="podcast.fullPath + podcast.rssFilename"
           ></textarea>
         </label>
 
         <transition name="fade">
-          <p
-            v-if="showClipboardAlert"
-            class="clipboard-alert"
-          >Copied to clipboard</p>
+          <p v-if="showClipboardAlert" class="clipboard-alert">
+            Copied to clipboard
+          </p>
         </transition>
       </section>
 
@@ -90,30 +87,41 @@ export default {
   computed: {
     categoryMarkup() {
       return this.podcast.subcategory
-        ? 
-    `<itunes:category text="${this.escapeAmpersands(this.podcast.category)}">
-      <itunes:category text="${this.escapeAmpersands(this.podcast.subcategory)}"/>
+        ? `<itunes:category text="${this.escapeAmpersands(
+            this.podcast.category
+          )}">
+      <itunes:category text="${this.escapeAmpersands(
+        this.podcast.subcategory
+      )}"/>
     </itunes:category>`
-        : `<itunes:category text="${this.escapeAmpersands(this.podcast.category)}"/>`
+        : `<itunes:category text="${this.escapeAmpersands(
+            this.podcast.category
+          )}"/>`
     },
     imageMarkup() {
       return this.podcast.image
         ? `<itunes:image href="${this.podcast.fullPath + this.podcast.image}"/>`
-        : ''
+        : ""
     },
     itemsMarkup() {
-      return this.podcast.episodes.map((episode, index) => {
-        const fullUri = this.podcast.fullPath + encodeURIComponent(episode)
-        return `
+      return this.podcast.episodes
+        .map((episode, index) => {
+          const fullUri = this.podcast.fullPath + encodeURIComponent(episode)
+          return `
     <item>
-      <title>Part ${index + 1}</title>
+      <title>${
+        this.podcast.useFilenamesAsTitles
+          ? episode.substr(0, episode.lastIndexOf(".")) || episode
+          : "Part " + parseInt(index + 1, 10)
+      }</title>
       <itunes:author>${this.podcast.author}</itunes:author>
       ${this.imageMarkup}
       <enclosure type="${this.podcast.enclosureType}" url="${fullUri}"/>
       <guid>${fullUri}</guid>
       <pubDate>${this.getPubDate(index)}</pubDate>
-    </item>`     
-      }).join('\n')
+    </item>`
+        })
+        .join("\n")
     },
     xmlMarkup() {
       return `<?xml version="1.0" encoding="UTF-8"?>
@@ -124,7 +132,7 @@ export default {
     <itunes:author>${this.podcast.author}</itunes:author>
     ${this.imageMarkup}
     ${this.categoryMarkup}
-    <itunes:explicit>${this.podcast.isExplicit ? 'yes' : 'no'}</itunes:explicit>
+    <itunes:explicit>${this.podcast.isExplicit ? "yes" : "no"}</itunes:explicit>
     ${this.itemsMarkup}
   </channel>
 </rss>`
@@ -133,8 +141,7 @@ export default {
   methods: {
     copyToClipboard(e) {
       e.target.select()
-      document.execCommand('copy') &&
-        this.displayCopyAlert()
+      document.execCommand("copy") && this.displayCopyAlert()
     },
     displayCopyAlert() {
       this.showClipboardAlert = true
@@ -143,12 +150,10 @@ export default {
       }, 1500)
     },
     escapeAmpersands(str) {
-      return str.replace(/&/, '&amp;')
+      return str.replace(/&/, "&amp;")
     },
     getPubDate(index) {
-      return new Date(
-        Date.now() - (index * (24 * 60 * 60 * 1000))
-      ).toUTCString()
+      return new Date(Date.now() - index * (24 * 60 * 60 * 1000)).toUTCString()
     }
   }
 }
@@ -161,13 +166,13 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   text-align: center;
   color: white;
-  font-size: .875rem;
+  font-size: 0.875rem;
   font-weight: bold;
-  background: rgba(0, 0, 0, .8);
-  border-radius: .5rem;
-  box-shadow: 0 .5rem 2rem rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
 }
 </style>

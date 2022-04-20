@@ -1,8 +1,5 @@
 <template>
-  <div 
-    class="container"
-    style="background-color: rgb(248, 245, 245);"
-  >
+  <div class="container" style="background-color: rgb(248, 245, 245)">
     <header>
       <h2>
         <strong class="numeral">1</strong>
@@ -24,11 +21,8 @@
         v-model="directory"
         @input="update()"
       >
-        <p
-          slot="afterField"
-          class="note"
-        >
-          Full path to media files: 
+        <p slot="afterField" class="note">
+          Full path to media files:
           <code>{{ fullPath }}</code>
         </p>
       </InputText>
@@ -61,10 +55,7 @@
         @input="update()"
       />
 
-      <InputCategory
-        v-model="rawCategory"
-        @input="update()"
-      />
+      <InputCategory v-model="rawCategory" @input="update()" />
 
       <InputText
         label="Media Filenames (one per line)"
@@ -77,17 +68,25 @@
         <template slot="afterField">
           <code>
             {{ episodes.length }}
-            episode{{ episodes.length === 1 ? '' : 's' }}
+            episode{{ episodes.length === 1 ? "" : "s" }}
           </code>
           <p class="note">
-            List files in listening order.
-            Most podcast apps play newest episodes first,
-            so episode dates will be applied with the first 
-            listed episode marked as published today, the 
-            second yesterday, etc.
+            List files in listening order. Most podcast apps play newest
+            episodes first, so episode dates will be applied with the first
+            listed episode marked as published today, the second yesterday, etc.
           </p>
         </template>
       </InputText>
+
+      <label style="font-weight: normal">
+        <input
+          type="checkbox"
+          style="display: inline; margin-right: 0.25rem; width: auto"
+          v-model="useFilenamesAsTitles"
+          @change="update()"
+        />
+        Use filenames as episode titles
+      </label>
 
       <InputText
         label="Enclosure Type"
@@ -99,11 +98,7 @@
       <label>
         <input
           type="checkbox"
-          style="
-            display: inline;
-            margin-right: .25rem;
-            width: auto;
-          "
+          style="display: inline; margin-right: 0.25rem; width: auto"
           v-model="isExplicit"
           @change="update()"
         />
@@ -114,8 +109,8 @@
 </template>
 
 <script>
-import InputCategory from './InputCategory.vue'
-import InputText from './InputText.vue'
+import InputCategory from "./InputCategory.vue"
+import InputText from "./InputText.vue"
 
 export default {
   components: {
@@ -127,15 +122,15 @@ export default {
   },
   data() {
     return {
-      author: 'Jared Diamond',
-      directory: 'Guns, Germs, and Steel',
-      enclosureType: 'audio/mpeg',
-      image: 'guns-germs-and-steel-2.jpg',
+      author: "Jared Diamond",
+      directory: "Guns, Germs, and Steel",
+      enclosureType: "audio/mpeg",
+      image: "guns-germs-and-steel-2.jpg",
       isExplicit: false,
-      path: 'https://tinymachine.s3.amazonaws.com/media/',
-      rawCategory: 'Society & Culture|History',
-      rawEpisodes: 
-`01 Guns, Germs and Steel - Part 01.mp3
+      useFilenamesAsTitles: false,
+      path: "https://tinymachine.s3.amazonaws.com/media/",
+      rawCategory: "Society & Culture|History",
+      rawEpisodes: `01 Guns, Germs and Steel - Part 01.mp3
 02 Guns, Germs and Steel - Part 02.mp3
 03 Guns, Germs and Steel - Part 03.mp3
 04 Guns, Germs and Steel - Part 04.mp3
@@ -148,22 +143,24 @@ export default {
 11 Guns, Germs and Steel - Part 11.mp3
 12 Guns, Germs and Steel - Part 12.mp3
 13 Guns, Germs and Steel - Part 13.mp3`,
-      rssFilename: 'rss.xml',
-      title: 'Guns, Germs, and Steel'
+      rssFilename: "rss.xml",
+      title: "Guns, Germs, and Steel"
     }
   },
   computed: {
     category() {
-      return this.rawCategory.split('|')[0]
+      return this.rawCategory.split("|")[0]
     },
     episodes() {
-      return this.rawEpisodes
-        .split(/\n/)
-        .filter(line => (/\S/).test(line))
+      return this.rawEpisodes.split(/\n/).filter((line) => /\S/.test(line))
     },
     fullPath() {
-      return encodeURI(this.path.replace(/\/+$/, '')) + '/' +
-        encodeURIComponent(this.directory) + '/'
+      return (
+        encodeURI(this.path.replace(/\/+$/, "")) +
+        "/" +
+        encodeURIComponent(this.directory) +
+        "/"
+      )
     },
     requiredFieldsFilled() {
       return (
@@ -190,16 +187,17 @@ export default {
         rssFilename: this.rssFilename,
         subcategory: this.subcategory,
         title: this.title,
+        useFilenamesAsTitles: this.useFilenamesAsTitles
       }
     },
     subcategory() {
-      return this.rawCategory.split('|')[1]
+      return this.rawCategory.split("|")[1]
     }
   },
   methods: {
     update() {
       this.$nextTick(function () {
-        this.$emit('update', this.podcast)
+        this.$emit("update", this.podcast)
       })
     }
   }
